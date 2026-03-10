@@ -1,0 +1,38 @@
+[project]
+name = "satoshi-vaults"
+description = "Modular Stacks Lending Protocol"
+authors = []
+telemetry = false
+cache_dir = ".cache"
+
+[contracts.traits]
+path = "contracts/contracts/traits.clar"
+depends_on = []
+
+[contracts.vault-usd]
+path = "contracts/contracts/vault-usd.clar"
+depends_on = ["traits"]
+
+[contracts.mock-sbtc]
+path = "contracts/contracts/mock-sbtc.clar"
+depends_on = ["traits"]
+
+[contracts.mock-oracle]
+path = "contracts/contracts/mock-oracle.clar"
+depends_on = ["traits"]
+
+[contracts.pyth-wrapper]
+path = "contracts/contracts/pyth-wrapper.clar"
+depends_on = ["traits"]
+
+[contracts.default-risk-engine]
+path = "contracts/contracts/default-risk-engine.clar"
+depends_on = ["traits"]
+
+[contracts.mock-reputation-engine]
+path = "contracts/contracts/mock-reputation-engine.clar"
+depends_on = ["traits"]
+
+[contracts.lending-protocol]
+path = "contracts/contracts/lending-protocol.clar"
+depends_on = ["traits", "vault-usd", "mock-sbtc", "mock-oracle", "default-risk-engine", "mock-reputation-engine"]

@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #F7931A;
+  --color-stacks: #5546FF;
+  --color-background-dark: #0A0A0A;
+  --font-display: "Public Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  font-family: "Public Sans", sans-serif;
+  background-color: #FAFAF9;
+}
+
+:where(.dark) body {
+  background-color: #0A0A0A;
+}
+
+/* Light mode: crisp white card with layered shadow */
+.glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(228, 228, 231, 0.7);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Dark mode: translucent zinc glass */
+:where(.dark) .glass {
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* JetBrains Mono shorthand */
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Material Symbols default variation */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+/* Filled variant for active nav icons */
+.fill-1 {
+  font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 0, "opsz" 24;
+}
+
+/* Canonical card — use everywhere instead of ad-hoc bg/border combos */
+.card {
+  background-color: white;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(228 228 231 / 0.8);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04);
+}
+
+:where(.dark) .card {
+  background-color: rgb(24 24 27 / 0.6);
+  border-color: rgb(39 39 42 / 0.7);
+  box-shadow: none;
+}
+
+/* ── Portfolio card — themed per mode ─────────────────────────── */
+.portfolio-card {
+  /* Light mode: clean white card matching the rest of the UI */
+  background: white;
+  border: 1px solid rgb(228 228 231 / 0.7);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 20px rgba(0,0,0,0.06);
+}
+
+:where(.dark) .portfolio-card {
+  /* Dark mode: near-black deep brown */
+  background: linear-gradient(135deg, #180f05 0%, #220e04 45%, #130904 100%);
+  border: 1px solid rgba(247, 147, 26, 0.1);
+  box-shadow: 0 10px 40px -10px rgba(247, 147, 26, 0.12);
+}
+
+/* ── Premium Card — Gradient borders and depth ────────────────── */
+.premium-card {
+  position: relative;
+  background: white;
+  border: 1px solid rgb(228 228 231 / 0.8);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 24px -4px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+:where(.dark) .premium-card {
+  background: rgba(24, 24, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.premium-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+:where(.dark) .premium-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--x, 0) var(--y, 0), rgba(255,255,255,0.04), transparent 40%);
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite linear;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ── Score slider — styled thumb ─────────────────────────────── */
+.score-slider {
+  appearance: none;
+  outline: none;
+  background: transparent;
+}
+
+.score-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgb(228 228 231);
+}
+
+:where(.dark) .score-slider::-webkit-slider-runnable-track {
+  background: rgb(63 63 70);
+}
+
+/* The thumb — big visible handle */
+.score-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--thumb-color, #F7931A);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--thumb-color, #F7931A) 18%, transparent),
+    0 2px 8px rgba(0, 0, 0, 0.18);
+  cursor: grab;
+  transition: box-shadow 0.2s ease, border-color 0.3s ease;
+  margin-top: -9px;
+}
+
+.score-slider::-webkit-slider-thumb:hover {
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--thumb-color, #F7931A) 22%, transparent),
+    0 2px 10px rgba(0, 0, 0, 0.22);
+}
+
+.score-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+:where(.dark) .score-slider::-webkit-slider-thumb {
+  background: #18181b;
+}
+
+/* Firefox */
+.score-slider::-moz-range-track {
+  height: 8px;
+  border-radius: 9999px;
+  background: rgb(228 228 231);
+}
+
+:where(.dark) .score-slider::-moz-range-track {
+  background: rgb(63 63 70);
+}
+
+.score-slider::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--thumb-color, #F7931A);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--thumb-color, #F7931A) 18%, transparent);
+  cursor: grab;
+}

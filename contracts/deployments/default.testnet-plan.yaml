@@ -1,0 +1,18 @@
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: lending-protocol-v3
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 246910
+            path: "contracts/lending-protocol-v3.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"

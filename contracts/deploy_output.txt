@@ -1,0 +1,144 @@
+﻿note: using existing deployments/default.testnet-plan.yaml
+The following deployment plan will be applied:
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 112090
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 47590
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-deposit
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 41510
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-deposit.clar"
+            clarity-version: 3
+      epoch: "3.0"
+    - id: 1
+      transactions:
+        - contract-publish:
+            contract-name: default-risk-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8290
+            path: "contracts\\default-risk-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: lending-protocol-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 97000
+            path: "contracts\\lending-protocol-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-oracle-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8680
+            path: "contracts\\mock-oracle-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-pyth-oracle-v4-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 12610
+            path: "contracts\\mock-pyth-oracle-v4-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-reputation-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8980
+            path: "contracts\\mock-reputation-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-sbtc-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 10340
+            path: "contracts\\mock-sbtc-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: optimizer-vault-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 75430
+            path: "contracts\\optimizer-vault-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: p2p-matching-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 106580
+            path: "contracts\\p2p-matching-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: pyth-wrapper-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 17840
+            path: "contracts\\pyth-wrapper-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: reputation-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 19080
+            path: "contracts\\reputation-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"
+    - id: 2
+      transactions:
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 40170
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 17320
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 26050
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo.clar"
+            clarity-version: 3
+      epoch: "3.3"
+
+
+Total cost:	0.364830 STX
+Duration:	3 blocks
+
+
+Continue [Y/n]?

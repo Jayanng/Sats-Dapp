@@ -1,0 +1,1248 @@
+﻿note: using existing deployments/default.testnet-plan.yaml
+The following deployment plan will be applied:
+---
+id: 0
+name: Testnet deployment
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 112090
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 47590
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-deposit
+            remap-sender: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            remap-principals:
+              SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4: ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT
+            cost: 41510
+            path: ".\\.cache\\requirements\\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-deposit.clar"
+            clarity-version: 3
+      epoch: "3.0"
+    - id: 1
+      transactions:
+        - contract-publish:
+            contract-name: default-risk-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8290
+            path: "contracts\\default-risk-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: lending-protocol-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 97000
+            path: "contracts\\lending-protocol-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-oracle-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8680
+            path: "contracts\\mock-oracle-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-pyth-oracle-v4-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 12610
+            path: "contracts\\mock-pyth-oracle-v4-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-reputation-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 8980
+            path: "contracts\\mock-reputation-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: mock-sbtc-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 10340
+            path: "contracts\\mock-sbtc-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: optimizer-vault-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 75430
+            path: "contracts\\optimizer-vault-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: p2p-matching-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 106580
+            path: "contracts\\p2p-matching-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: pyth-wrapper-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 17840
+            path: "contracts\\pyth-wrapper-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+        - contract-publish:
+            contract-name: reputation-engine-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 19080
+            path: "contracts\\reputation-engine-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"
+    - id: 2
+      transactions:
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 40170
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 17320
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo.clar"
+            clarity-version: 3
+        - requirement-publish:
+            contract-id: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo
+            remap-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            remap-principals:
+              ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 26050
+            path: ".\\.cache\\requirements\\ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo.clar"
+            clarity-version: 3
+      epoch: "3.3"
+
+
+Total cost:	0.364830 STX
+Duration:	3 blocks
+
+
+Continue [Y/n]?
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 61, tx_fee: 8290, key_encoding: Compressed, signature: 000f8e3de0301dfa1db746d6e059b100dfd456b6f26586e04562a2ed0be026e6681def147ee58fc6071776a7b5837dd6dc714b719beaef37ccf0c2d81d36e63fa4 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("default-risk-engine-demo"), code_body: ;; default-risk-engine
+;; A fallback risk engine requiring 150% overcollateralization.
+
+(impl-trait .traits-demo.risk-engine-trait)
+
+(define-constant ERR-COLLATERAL-CALC-FAILED (err u500))
+
+;; Returns the required collateralization ratio in basis points (e.g., u15000 for 150%)
+(define-read-only (get-required-collateral (user principal))
+  (begin
+    ;; evaluate user to avoid unused-parameter warning
+    (asserts! (is-eq user user) (err u0))
+    (ok u15000)
+  )
+)
+
+;; Calculates the maximum borrowable amount based on collateral and user
+;; max-borrow = (collateral-usd-value * 10000) / required-collateral
+(define-read-only (calculate-borrow-limit
+    (collateral-usd-value uint)
+    (user principal)
+  )
+  (ok (/ (* collateral-usd-value u10000)
+    (unwrap! (get-required-collateral user) ERR-COLLATERAL-CALC-FAILED)
+  ))
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("default-risk-engine-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.default-risk-engine-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 62, tx_fee: 97000, key_encoding: Compressed, signature: 000f401f14a411c73eac670b8393bd6f8ae031cc0da0d8b4c109c5278aa67084fe7c5d0065e8076f547db28394022cf1f4e9c3f6e4a586eee8b7a1ff98ddac1e48 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("lending-protocol-demo"), code_body: ;; lending-protocol-demo
+;; Core primitive for Satoshi Vaults
+;; TESTNET VERSION - all principals fully qualified for ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+
+(use-trait sip-010-trait 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo.sip-010-trait)
+(use-trait risk-engine-trait 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo.risk-engine-trait)
+(use-trait oracle-trait 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.traits-demo.oracle-trait)
+
+(define-constant ERR-INSUFFICIENT-COLLATERAL (err u1002))
+(define-constant ERR-VAULT-HEALTHY (err u1003))
+(define-constant ERR-RISK-ENGINE-MISMATCH (err u1005))
+(define-constant ERR-NO-VAULT (err u1006))
+(define-constant ERR-ORACLE-FAILED (err u1007))
+(define-constant ERR-BORROW-LIMIT-CALC (err u1008))
+
+(define-map Vaults
+  { owner: principal }
+  { collateral: uint, debt: uint, risk-engine: principal }
+)
+
+(define-read-only (get-vault (owner principal))
+  (map-get? Vaults { owner: owner })
+)
+
+(define-public (get-health-factor
+    (owner principal)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>)
+  )
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: owner }) ERR-NO-VAULT))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (contract-of sbtc)) ERR-ORACLE-FAILED))
+      (collateral-usd (/ (* (get collateral vault) sbtc-price) u100000000))
+      (max-borrow (unwrap! (contract-call? risk-engine calculate-borrow-limit collateral-usd owner) ERR-BORROW-LIMIT-CALC))
+      (debt (get debt vault))
+    )
+    (if (is-eq debt u0)
+      (ok u999999)
+      (ok (/ (* max-borrow u100) debt))
+    )
+  )
+)
+
+(define-public (supply
+    (amount uint)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+  )
+  (let (
+      (vault (default-to { collateral: u0, debt: u0, risk-engine: (contract-of risk-engine) }
+        (map-get? Vaults { owner: tx-sender })))
+      (new-collateral (+ (get collateral vault) amount))
+    )
+    (asserts! (is-eq (get risk-engine vault) (contract-of risk-engine)) ERR-RISK-ENGINE-MISMATCH)
+    ;; #[allow(unchecked_data)]
+    (try! (contract-call? sbtc transfer amount tx-sender (as-contract tx-sender) none))
+    (map-set Vaults { owner: tx-sender } (merge vault { collateral: new-collateral }))
+    (print { event: "supply", owner: tx-sender, amount: amount, new-collateral: new-collateral, block: stacks-block-height })
+    (ok new-collateral)
+  )
+)
+
+(define-public (withdraw
+    (amount uint)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>)
+  )
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: tx-sender }) ERR-NO-VAULT))
+      (new-collateral (- (get collateral vault) amount))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (contract-of sbtc)) ERR-ORACLE-FAILED))
+      (collateral-usd (/ (* new-collateral sbtc-price) u100000000))
+      (max-borrow (unwrap! (contract-call? risk-engine calculate-borrow-limit collateral-usd tx-sender) ERR-BORROW-LIMIT-CALC))
+      (caller tx-sender)
+    )
+    (asserts! (is-eq (get risk-engine vault) (contract-of risk-engine)) ERR-RISK-ENGINE-MISMATCH)
+    (asserts! (<= (get debt vault) max-borrow) ERR-INSUFFICIENT-COLLATERAL)
+    (map-set Vaults { owner: tx-sender } (merge vault { collateral: new-collateral }))
+    ;; #[allow(unchecked_data)]
+    (try! (as-contract (contract-call? sbtc transfer amount tx-sender caller none)))
+    (print { event: "withdraw", owner: caller, amount: amount, new-collateral: new-collateral, block: stacks-block-height })
+    (ok amount)
+  )
+)
+
+(define-public (borrow
+    (amount uint)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>)
+  )
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: tx-sender }) ERR-NO-VAULT))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (contract-of sbtc)) ERR-ORACLE-FAILED))
+      (collateral-usd (/ (* (get collateral vault) sbtc-price) u100000000))
+      (max-borrow (unwrap! (contract-call? risk-engine calculate-borrow-limit collateral-usd tx-sender) ERR-BORROW-LIMIT-CALC))
+      (new-debt (+ (get debt vault) amount))
+      (recipient tx-sender)
+    )
+    (asserts! (is-eq (get risk-engine vault) (contract-of risk-engine)) ERR-RISK-ENGINE-MISMATCH)
+    (asserts! (<= new-debt max-borrow) ERR-INSUFFICIENT-COLLATERAL)
+    (map-set Vaults { owner: tx-sender } (merge vault { debt: new-debt }))
+    (try! (as-contract (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo mint amount recipient)))
+    (print { event: "borrow", owner: recipient, amount: amount, new-debt: new-debt, block: stacks-block-height })
+    (ok amount)
+  )
+)
+
+(define-public (repay (amount uint))
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: tx-sender }) ERR-NO-VAULT))
+      (repay-amount (if (> amount (get debt vault)) (get debt vault) amount))
+      (new-debt (- (get debt vault) repay-amount))
+      (borrower tx-sender)
+    )
+    (try! (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo burn repay-amount tx-sender))
+    (map-set Vaults { owner: tx-sender } (merge vault { debt: new-debt }))
+    (match (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo update-score borrower 10)
+      success true
+      err-val true
+    )
+    (print { event: "repay", owner: borrower, repay-amount: repay-amount, new-debt: new-debt, block: stacks-block-height })
+    (ok repay-amount)
+  )
+)
+
+(define-public (redeem
+    (vusd-amount uint)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>)
+  )
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: tx-sender }) ERR-NO-VAULT))
+      (repay-amount (if (> vusd-amount (get debt vault)) (get debt vault) vusd-amount))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (contract-of sbtc)) ERR-ORACLE-FAILED))
+      (sbtc-unlocked (/ (* repay-amount u1000) sbtc-price))
+      (new-debt (- (get debt vault) repay-amount))
+      (new-collateral (- (get collateral vault) sbtc-unlocked))
+      (caller tx-sender)
+    )
+    (asserts! (is-eq (get risk-engine vault) (contract-of risk-engine)) ERR-RISK-ENGINE-MISMATCH)
+    (try! (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo burn repay-amount tx-sender))
+    (map-set Vaults { owner: tx-sender } (merge vault { debt: new-debt, collateral: new-collateral }))
+    ;; #[allow(unchecked_data)]
+    (try! (as-contract (contract-call? sbtc transfer sbtc-unlocked tx-sender caller none)))
+    (print { event: "redeem", owner: caller, vusd-burned: repay-amount, sbtc-returned: sbtc-unlocked, block: stacks-block-height })
+    (ok sbtc-unlocked)
+  )
+)
+
+(define-public (liquidate
+    (target principal)
+    (amount uint)
+    (sbtc <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>)
+  )
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: target }) ERR-NO-VAULT))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (contract-of sbtc)) ERR-ORACLE-FAILED))
+      (collateral-usd (/ (* (get collateral vault) sbtc-price) u100000000))
+      (max-borrow (unwrap! (contract-call? risk-engine calculate-borrow-limit collateral-usd target) ERR-BORROW-LIMIT-CALC))
+      (caller tx-sender)
+      (repay-amount (if (> amount (get debt vault)) (get debt vault) amount))
+      (sbtc-value-nominal (/ (* repay-amount u100000000) sbtc-price))
+      (sbtc-seize-intended (/ (* sbtc-value-nominal u105) u100))
+      (sbtc-to-seize (if (> sbtc-seize-intended (get collateral vault)) (get collateral vault) sbtc-seize-intended))
+    )
+    (asserts! (is-eq (get risk-engine vault) (contract-of risk-engine)) ERR-RISK-ENGINE-MISMATCH)
+    (asserts! (> (get debt vault) max-borrow) ERR-VAULT-HEALTHY)
+    (try! (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo burn repay-amount caller))
+    (map-set Vaults { owner: target }
+      (merge vault { collateral: (- (get collateral vault) sbtc-to-seize), debt: (- (get debt vault) repay-amount) })
+    )
+    ;; #[allow(unchecked_data)]
+    (try! (as-contract (contract-call? sbtc transfer sbtc-to-seize tx-sender caller none)))
+    (match (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo update-score target -50)
+      success true
+      err-val true
+    )
+    (print { event: "liquidate", liquidator: caller, target: target, repay-amount: repay-amount, sbtc-seized: sbtc-to-seize, block: stacks-block-height })
+    (ok sbtc-to-seize)
+  )
+)
+
+(define-map Delegations
+  { owner: principal }
+  { pool: principal, amount: uint, delegated-at: uint }
+)
+
+;; #[allow(unchecked_data)]
+(define-public (delegate-to-pox
+    (amount uint)
+    (pool principal)
+    (until-burn-ht (optional uint))
+  )
+  (begin
+    (asserts! (> amount u0) ERR-INSUFFICIENT-COLLATERAL)
+    (match (contract-call? 'SP000000000000000000002Q6VF78.pox-4 delegate-stx amount pool until-burn-ht none)
+      ok-val (begin
+        (map-set Delegations { owner: tx-sender } { pool: pool, amount: amount, delegated-at: stacks-block-height })
+        (print { event: "pox-delegated", owner: tx-sender, pool: pool, amount: amount, block: stacks-block-height })
+        (ok true)
+      )
+      err-val (err (to-uint (* err-val -1)))
+    )
+  )
+)
+
+(define-public (revoke-delegate-stx)
+  (begin
+    (match (contract-call? 'SP000000000000000000002Q6VF78.pox-4 revoke-delegate-stx)
+      ok-val (begin
+        (map-delete Delegations { owner: tx-sender })
+        (print { event: "pox-revoked", owner: tx-sender, block: stacks-block-height })
+        (ok true)
+      )
+      err-val (err (to-uint (* err-val -1)))
+    )
+  )
+)
+
+(define-read-only (get-delegation (owner principal))
+  (map-get? Delegations { owner: owner })
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("lending-protocol-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.lending-protocol-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 63, tx_fee: 8680, key_encoding: Compressed, signature: 003568eee13ef20c6cfb82efb0c3d2424207e787c75aac48ab71cf5fdc82e84cf541d05b7cc0c48d1b34d6fd7466c2960072896abe01ccec45793802fdf15d14fb })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("mock-oracle-demo"), code_body: ;; mock-oracle
+;; Simulates a price feed for Satoshi Vaults testnet deployment.
+;; Returns prices scaled by 10^6 (for 6 decimal precision).
+
+(impl-trait .traits-demo.oracle-trait)
+
+;; Default to $64,000.00 USD
+(define-data-var sbtc-price uint u64000000000)
+
+(define-constant ERR-NOT-AUTHORIZED (err u1001))
+
+;; Admin only
+(define-public (set-price (new-price uint))
+  (begin
+    (asserts! (is-eq tx-sender tx-sender) ERR-NOT-AUTHORIZED) ;; Add proper admin checks later
+    ;; #[allow(unchecked_data)]
+    (ok (var-set sbtc-price new-price))
+  )
+)
+
+;; oracle-trait implementation
+(define-read-only (get-price (asset principal))
+  ;; In a real oracle, this would check the `asset` and return its specific price.
+  ;; For this mock, we assume it's always returning the sBTC price.
+  (begin
+    (asserts! (is-eq asset asset) (err u0))
+    (ok (var-get sbtc-price))
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("mock-oracle-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.mock-oracle-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 64, tx_fee: 12610, key_encoding: Compressed, signature: 005996fe2354c6685f9e0560c6231156a5b2ccbf3a81a55548e3073a96a844ad486dfe2d811b370e49f44e561894303cb7e39fc366442e99609f65d5783b0b7196 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("mock-pyth-oracle-v4-demo"), code_body: ;; mock-pyth-oracle-v4.clar
+;; Simnet stub for pyth-oracle-v4. Used only in tests.
+;; On testnet, SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-oracle-v4 is used.
+
+;; Fixed BTC price: $64,000 scaled to int with expo -9
+;; pyth-wrapper normalise-pyth-price: (/ (* price 10) 100000000)
+;; So price-raw should be 64000 * 1e8 = 6400000000000
+(define-constant STUB-PRICE 6400000000000)
+
+;; Mimics pyth-oracle-v4 get-price interface
+;; Returns (ok { price: int, conf: uint, expo: int, publish-time: uint })
+(define-read-only (get-price
+    (feed-id (buff 32))
+    (pyth-storage principal)
+  )
+  (begin
+    ;; suppress unused warnings by evaluating and ignoring
+    (asserts! (is-eq feed-id feed-id) (err u0))
+    (asserts! (is-eq pyth-storage pyth-storage) (err u0))
+    (ok {
+      price: STUB-PRICE,
+      conf: u100000000,
+      expo: -9,
+      publish-time: u0,
+    })
+  )
+)
+
+;; Mimics verify-and-update-price-feeds
+;; Called from pyth-wrapper with (list price-feed-bytes) and fee-info tuple
+(define-public (verify-and-update-price-feeds
+    (vaas (list 5 (buff 8192)))
+    (fee-info {
+      amount: uint,
+      asset: principal,
+    })
+  )
+  (begin
+    (asserts! (is-eq vaas vaas) (err u0))
+    (asserts! (is-eq fee-info fee-info) (err u0))
+    (ok true)
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("mock-pyth-oracle-v4-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.mock-pyth-oracle-v4-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 65, tx_fee: 8980, key_encoding: Compressed, signature: 0037206ac891727a33a63ca24cc2ee4e0e941842b24393814e110272fa251aae861a9e6854d004b37cc4ee462895d9fdfd42b76969bb8e6655218a5753e1d0f598 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("mock-reputation-engine-demo"), code_body: ;; mock-reputation-engine
+;; A mock risk engine that simulates a user with high reputation.
+;; Requires only 90% collateralization (undercollateralized loan).
+
+(impl-trait .traits-demo.risk-engine-trait)
+
+(define-constant ERR-COLLATERAL-CALC-FAILED (err u500))
+
+;; Returns the required collateralization ratio in basis points (e.g., u9000 for 90%)
+(define-read-only (get-required-collateral (user principal))
+  (begin
+    ;; evaluate user to avoid unused-parameter warning
+    (asserts! (is-eq user user) (err u0))
+    (ok u9000)
+  )
+)
+
+;; Calculates the maximum borrowable amount based on collateral and user
+;; max-borrow = (collateral-usd-value * 10000) / required-collateral
+(define-read-only (calculate-borrow-limit
+    (collateral-usd-value uint)
+    (user principal)
+  )
+  (ok (/ (* collateral-usd-value u10000)
+    (unwrap! (get-required-collateral user) ERR-COLLATERAL-CALC-FAILED)
+  ))
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("mock-reputation-engine-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.mock-reputation-engine-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 66, tx_fee: 10340, key_encoding: Compressed, signature: 01d8d6cb14dd76abaa1b29b7a5ec81bfc4496ea2b7d48ca4f6b7a0192bd42f79203b473360c50c8d8ed8944b29bb9318ceb3a91059f78bbe831f2af23c78314da6 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("mock-sbtc-demo"), code_body: ;; mock-sbtc
+;; A SIP-010 compliant fungible token used as mock sBTC for testing.
+
+(impl-trait .traits-demo.sip-010-trait)
+
+(define-fungible-token mock-sbtc)
+
+;; SIP-010 Functions
+(define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34))))
+  (begin
+    (asserts! (is-eq tx-sender sender) (err u100))
+    ;; #[allow(unchecked_data)]
+    (try! (ft-transfer? mock-sbtc amount sender recipient))
+    (match memo to-print (print to-print) 0x)
+    (ok true)
+  )
+)
+
+(define-read-only (get-name)
+  (ok "Mock sBTC")
+)
+
+(define-read-only (get-symbol)
+  (ok "sBTC")
+)
+
+(define-read-only (get-decimals)
+  (ok u8)
+)
+
+(define-read-only (get-balance (account principal))
+  (ok (ft-get-balance mock-sbtc account))
+)
+
+(define-read-only (get-total-supply)
+  (ok (ft-get-supply mock-sbtc))
+)
+
+(define-read-only (get-token-uri)
+  (ok none)
+)
+
+;; Minting function for testing
+(define-public (mint (amount uint) (recipient principal))
+  ;; #[allow(unchecked_data)]
+  (ft-mint? mock-sbtc amount recipient)
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("mock-sbtc-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.mock-sbtc-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 67, tx_fee: 75430, key_encoding: Compressed, signature: 00701db6cb3c603d1f93b3ad33269f04471b2d9e93a814e31b101ad561592367483bd079f4324e4fbfd9c18d0cf603b76a49574e1750200da24caf053b0f34d234 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("optimizer-vault-demo"), code_body: ;; optimizer-vault
+;; Auto-compounding PoX vault for Satoshi Vaults.
+;; Users deposit sBTC and earn yield from simulated PoX rewards.
+;; Share-based accounting ensures fair distribution among depositors.
+
+(use-trait sip-010-trait .traits-demo.sip-010-trait)
+
+;; Error constants
+(define-constant ERR-NOT-AUTHORIZED (err u2000))
+(define-constant ERR-ZERO-AMOUNT (err u2001))
+(define-constant ERR-NO-POSITION (err u2002))
+(define-constant ERR-INSUFFICIENT-SHARES (err u2003))
+(define-constant ERR-VAULT-EMPTY (err u2004))
+(define-constant ERR-HARVEST-TOO-SOON (err u2006))
+(define-constant ERR-MAX-CAPACITY (err u2007))
+
+;; Contract owner (set at deploy time)
+(define-constant CONTRACT-OWNER tx-sender)
+
+;; Max vault capacity: 100 sBTC in satoshis
+(define-constant MAX-CAPACITY u10000000000)
+;; Minimum harvest interval: 144 blocks (~1 day)
+(define-constant MIN-HARVEST-INTERVAL u144)
+;; PoX simulated yield per harvest: 0.5% (50 bps)
+(define-constant HARVEST-YIELD-BPS u50)
+;; Protocol performance fee: 10% of yield (1000 bps)
+(define-constant PERFORMANCE-FEE-BPS u1000)
+;; Scale factor for share math
+(define-constant SHARE-SCALE u1000000)
+
+;; Vault state vars
+(define-data-var total-assets uint u0)
+(define-data-var total-shares uint u0)
+(define-data-var last-harvest-block uint u0)
+(define-data-var total-yield-harvested uint u0)
+(define-data-var fee-recipient principal CONTRACT-OWNER)
+
+;; Per-user positions
+(define-map Positions
+  { owner: principal }
+  {
+    shares: uint,
+    deposited-at: uint,
+  }
+)
+
+;; Returns global vault stats
+(define-read-only (get-vault-stats)
+  {
+    total-assets: (var-get total-assets),
+    total-shares: (var-get total-shares),
+    last-harvest-block: (var-get last-harvest-block),
+    total-yield-harvested: (var-get total-yield-harvested),
+  }
+)
+
+;; Returns a user position with estimated sBTC value and pending yield
+(define-read-only (get-vault-info (owner principal))
+  (let (
+      (pos (default-to {
+        shares: u0,
+        deposited-at: u0,
+      }
+        (map-get? Positions { owner: owner })
+      ))
+      (shares (get shares pos))
+      (assets (var-get total-assets))
+      (t-shares (var-get total-shares))
+    )
+    {
+      shares: shares,
+      deposited-at: (get deposited-at pos),
+      sbtc-value: (if (> t-shares u0)
+        (/ (* shares assets) t-shares)
+        u0
+      ),
+      pending-yield: (if (> t-shares u0)
+        (/ (* (/ (* assets HARVEST-YIELD-BPS) u10000) shares) t-shares)
+        u0
+      ),
+    }
+  )
+)
+
+;; Preview shares received for a given sBTC deposit amount
+(define-read-only (preview-deposit (amount uint))
+  (let (
+      (assets (var-get total-assets))
+      (t-shares (var-get total-shares))
+    )
+    (if (or (is-eq assets u0) (is-eq t-shares u0))
+      (* amount SHARE-SCALE)
+      (/ (* amount t-shares) assets)
+    )
+  )
+)
+
+;; Preview sBTC returned for a given number of shares
+(define-read-only (preview-withdraw (shares uint))
+  (let (
+      (assets (var-get total-assets))
+      (t-shares (var-get total-shares))
+    )
+    (if (is-eq t-shares u0)
+      u0
+      (/ (* shares assets) t-shares)
+    )
+  )
+)
+
+;; Deposit sBTC and receive proportional vault shares.
+;; #[allow(unchecked_data)]
+(define-public (deposit
+    (amount uint)
+    (sbtc <sip-010-trait>)
+  )
+  (let (
+      (caller tx-sender)
+      (current-assets (var-get total-assets))
+      (current-shares (var-get total-shares))
+    )
+    (asserts! (> amount u0) ERR-ZERO-AMOUNT)
+    (asserts! (<= (+ current-assets amount) MAX-CAPACITY) ERR-MAX-CAPACITY)
+    (let (
+        (shares-to-mint (if (or (is-eq current-assets u0) (is-eq current-shares u0))
+          (* amount SHARE-SCALE)
+          (/ (* amount current-shares) current-assets)
+        ))
+        (existing-pos (default-to {
+          shares: u0,
+          deposited-at: u0,
+        }
+          (map-get? Positions { owner: caller })
+        ))
+      )
+      ;; #[allow(unchecked_data)]
+      (try! (contract-call? sbtc transfer amount caller (as-contract tx-sender) none))
+      (var-set total-assets (+ current-assets amount))
+      (var-set total-shares (+ current-shares shares-to-mint))
+      (map-set Positions { owner: caller } {
+        shares: (+ (get shares existing-pos) shares-to-mint),
+        deposited-at: stacks-block-height,
+      })
+      (print {
+        event: "optimizer-deposit",
+        depositor: caller,
+        sbtc-amount: amount,
+        shares-minted: shares-to-mint,
+        total-assets: (var-get total-assets),
+        block: stacks-block-height,
+      })
+      (ok shares-to-mint)
+    )
+  )
+)
+
+;; Burn shares and withdraw proportional sBTC.
+;; #[allow(unchecked_data)]
+(define-public (withdraw
+    (shares uint)
+    (sbtc <sip-010-trait>)
+  )
+  (let (
+      (caller tx-sender)
+      (pos (unwrap! (map-get? Positions { owner: caller }) ERR-NO-POSITION))
+      (user-shares (get shares pos))
+      (current-assets (var-get total-assets))
+      (current-shares (var-get total-shares))
+    )
+    (asserts! (> shares u0) ERR-ZERO-AMOUNT)
+    (asserts! (>= user-shares shares) ERR-INSUFFICIENT-SHARES)
+    (asserts! (> current-shares u0) ERR-VAULT-EMPTY)
+    (let (
+        (sbtc-out (/ (* shares current-assets) current-shares))
+        (new-user-shares (- user-shares shares))
+      )
+      (var-set total-assets (- current-assets sbtc-out))
+      (var-set total-shares (- current-shares shares))
+      (if (is-eq new-user-shares u0)
+        (map-delete Positions { owner: caller })
+        (map-set Positions { owner: caller }
+          (merge pos { shares: new-user-shares })
+        )
+      )
+      ;; #[allow(unchecked_data)]
+      (try! (as-contract (contract-call? sbtc transfer sbtc-out tx-sender caller none)))
+      (print {
+        event: "optimizer-withdraw",
+        depositor: caller,
+        shares-burned: shares,
+        sbtc-returned: sbtc-out,
+        total-assets: (var-get total-assets),
+        block: stacks-block-height,
+      })
+      (ok sbtc-out)
+    )
+  )
+)
+
+;; Permissionless harvest: compounds simulated PoX yield into vault assets.
+;; In production this would call .pox-4 and swap STX rewards for sBTC via DEX.
+(define-public (harvest)
+  (let (
+      (assets (var-get total-assets))
+      (blocks-since (- stacks-block-height (var-get last-harvest-block)))
+    )
+    (asserts! (> assets u0) ERR-VAULT-EMPTY)
+    (asserts! (>= blocks-since MIN-HARVEST-INTERVAL) ERR-HARVEST-TOO-SOON)
+    (let (
+        (gross-yield (/ (* assets HARVEST-YIELD-BPS) u10000))
+        (protocol-fee (/ (* gross-yield PERFORMANCE-FEE-BPS) u10000))
+        (net-yield (- gross-yield protocol-fee))
+      )
+      (var-set total-assets (+ assets net-yield))
+      (var-set last-harvest-block stacks-block-height)
+      (var-set total-yield-harvested
+        (+ (var-get total-yield-harvested) gross-yield)
+      )
+      (print {
+        event: "optimizer-harvest",
+        harvester: tx-sender,
+        gross-yield: gross-yield,
+        protocol-fee: protocol-fee,
+        net-yield: net-yield,
+        new-total-assets: (var-get total-assets),
+        block: stacks-block-height,
+      })
+      (ok {
+        gross-yield: gross-yield,
+        net-yield: net-yield,
+        protocol-fee: protocol-fee,
+      })
+    )
+  )
+)
+
+;; Returns the current fee recipient address
+(define-read-only (get-fee-recipient)
+  (var-get fee-recipient)
+)
+
+;; Admin: update fee recipient
+;; #[allow(unchecked_data)]
+(define-public (set-fee-recipient (new-recipient principal))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set fee-recipient new-recipient)
+    (ok true)
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("optimizer-vault-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.optimizer-vault-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 68, tx_fee: 106580, key_encoding: Compressed, signature: 00ed5c633d080dd6b8e1422f2f8c484fbaa8dd2c7333dab09489b9722ac1ac85a45e806c8332a4176877d2761b1c24cdd52f9800c7102b63aeacc718aa6be59d63 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("p2p-matching-demo"), code_body: ;; p2p-matching
+;; Morpho-style peer-to-peer loan order book for Satoshi Vaults.
+;; Lenders post VUSD offers; borrowers fill them by locking sBTC collateral.
+;; Fully trustless: liquidation is permissionless, repayment unlocks collateral.
+
+(use-trait sip-010-trait .traits-demo.sip-010-trait)
+(use-trait oracle-trait .traits-demo.oracle-trait)
+(use-trait risk-engine-trait .traits-demo.risk-engine-trait)
+
+;; ---- Error constants ------------------------------------------------
+
+(define-constant ERR-NOT-AUTHORIZED      (err u3000))
+(define-constant ERR-ZERO-AMOUNT         (err u3001))
+(define-constant ERR-OFFER-NOT-FOUND     (err u3002))
+(define-constant ERR-OFFER-INACTIVE      (err u3003))
+(define-constant ERR-OFFER-FILLED        (err u3004))
+(define-constant ERR-LOAN-NOT-FOUND      (err u3005))
+(define-constant ERR-LOAN-NOT-DUE        (err u3007))
+(define-constant ERR-ALREADY-REPAID      (err u3010))
+(define-constant ERR-BORROW-LIMIT        (err u3011))
+
+;; ---- Protocol parameters --------------------------------------------
+
+;; Minimum loan duration: 144 blocks (~1 day)
+(define-constant MIN-DURATION u144)
+;; Maximum loan duration: 52560 blocks (~1 year)
+(define-constant MAX-DURATION u52560)
+;; Liquidation bonus: 5% to liquidator (500 bps)
+(define-constant LIQUIDATION-BONUS-BPS u500)
+;; Interest precision scale (basis points, 1 bps = 0.01%)
+(define-constant BPS-SCALE u10000)
+
+;; ---- State ----------------------------------------------------------
+
+(define-data-var next-offer-id uint u1)
+(define-data-var next-loan-id  uint u1)
+
+;; Lender offer book
+(define-map LoanOffers
+  { offer-id: uint }
+  {
+    lender: principal,
+    amount: uint,
+    rate-bps: uint,
+    min-duration: uint,
+    filled: bool,
+    active: bool,
+  }
+)
+
+;; Active loan book
+(define-map ActiveLoans
+  { loan-id: uint }
+  {
+    lender: principal,
+    borrower: principal,
+    amount: uint,
+    collateral: uint,
+    rate-bps: uint,
+    start-block: uint,
+    due-block: uint,
+    repaid: bool,
+  }
+)
+
+;; ---- Read-only views ------------------------------------------------
+
+(define-read-only (get-offer (offer-id uint))
+  (map-get? LoanOffers { offer-id: offer-id })
+)
+
+(define-read-only (get-loan (loan-id uint))
+  (map-get? ActiveLoans { loan-id: loan-id })
+)
+
+(define-read-only (get-next-offer-id)
+  (var-get next-offer-id)
+)
+
+(define-read-only (get-next-loan-id)
+  (var-get next-loan-id)
+)
+
+;; Calculate interest owed: principal * rate-bps * blocks / (BPS-SCALE * blocks-per-year)
+(define-read-only (calculate-interest (principal uint) (rate-bps uint) (blocks uint))
+  (/ (* (* principal rate-bps) blocks) (* BPS-SCALE u52560))
+)
+
+;; ---- Public functions -----------------------------------------------
+
+;; Lender posts a VUSD offer at a given annual rate.
+;; Locks lender VUSD into this contract until filled or cancelled.
+;; #[allow(unchecked_data)]
+(define-public (post-offer
+    (amount uint)
+    (rate-bps uint)
+    (min-duration uint)
+    (vusd <sip-010-trait>))
+  (let (
+      (caller tx-sender)
+      (offer-id (var-get next-offer-id))
+    )
+    (asserts! (> amount u0) ERR-ZERO-AMOUNT)
+    (asserts! (>= min-duration MIN-DURATION) ERR-ZERO-AMOUNT)
+    (asserts! (<= min-duration MAX-DURATION) ERR-ZERO-AMOUNT)
+    (asserts! (> rate-bps u0) ERR-ZERO-AMOUNT)
+    ;; #[allow(unchecked_data)]
+    (try! (contract-call? vusd transfer amount caller (as-contract tx-sender) none))
+    (map-set LoanOffers { offer-id: offer-id }
+      {
+        lender: caller,
+        amount: amount,
+        rate-bps: rate-bps,
+        min-duration: min-duration,
+        filled: false,
+        active: true,
+      }
+    )
+    (var-set next-offer-id (+ offer-id u1))
+    (print {
+      event: "p2p-offer-posted",
+      offer-id: offer-id,
+      lender: caller,
+      amount: amount,
+      rate-bps: rate-bps,
+      min-duration: min-duration,
+      block: stacks-block-height,
+    })
+    (ok offer-id)
+  )
+)
+
+;; Borrower fills an offer by depositing sBTC collateral.
+;; Verifies the collateral meets requirements from the risk engine.
+;; Transfers VUSD principal to the borrower.
+;; #[allow(unchecked_data)]
+(define-public (fill-offer
+    (offer-id uint)
+    (duration uint)
+    (sbtc <sip-010-trait>)
+    (vusd <sip-010-trait>)
+    (risk-engine <risk-engine-trait>)
+    (oracle <oracle-trait>))
+  (let (
+      (caller tx-sender)
+      (offer (unwrap! (map-get? LoanOffers { offer-id: offer-id }) ERR-OFFER-NOT-FOUND))
+      (lender (get lender offer))
+      (amount (get amount offer))
+      (rate-bps (get rate-bps offer))
+      (loan-id (var-get next-loan-id))
+    )
+    (asserts! (get active offer) ERR-OFFER-INACTIVE)
+    (asserts! (not (get filled offer)) ERR-OFFER-FILLED)
+    (asserts! (>= duration (get min-duration offer)) ERR-ZERO-AMOUNT)
+    (asserts! (<= duration MAX-DURATION) ERR-ZERO-AMOUNT)
+    (let (
+        (borrow-limit (unwrap! (contract-call? risk-engine calculate-borrow-limit amount caller) ERR-BORROW-LIMIT))
+        (sbtc-price (unwrap! (contract-call? oracle get-price (as-contract tx-sender)) ERR-OFFER-NOT-FOUND))
+      )
+      (asserts! (>= borrow-limit amount) ERR-BORROW-LIMIT)
+      (let (
+          (required-collateral (/ (* (* amount u100000000) u150) (* sbtc-price u100)))
+        )
+        ;; #[allow(unchecked_data)]
+        (try! (contract-call? sbtc transfer required-collateral caller (as-contract tx-sender) none))
+        (map-set LoanOffers { offer-id: offer-id }
+          (merge offer { filled: true, active: false })
+        )
+        (map-set ActiveLoans { loan-id: loan-id }
+          {
+            lender: lender,
+            borrower: caller,
+            amount: amount,
+            collateral: required-collateral,
+            rate-bps: rate-bps,
+            start-block: stacks-block-height,
+            due-block: (+ stacks-block-height duration),
+            repaid: false,
+          }
+        )
+        (var-set next-loan-id (+ loan-id u1))
+        ;; #[allow(unchecked_data)]
+        (try! (as-contract (contract-call? vusd transfer amount tx-sender caller none)))
+        (print {
+          event: "p2p-loan-created",
+          loan-id: loan-id,
+          offer-id: offer-id,
+          lender: lender,
+          borrower: caller,
+          amount: amount,
+          collateral: required-collateral,
+          rate-bps: rate-bps,
+          due-block: (+ stacks-block-height duration),
+          block: stacks-block-height,
+        })
+        (ok loan-id)
+      )
+    )
+  )
+)
+
+;; Borrower repays principal + accrued interest. sBTC collateral is returned.
+;; #[allow(unchecked_data)]
+(define-public (repay-loan
+    (loan-id uint)
+    (vusd <sip-010-trait>)
+    (sbtc <sip-010-trait>))
+  (let (
+      (caller tx-sender)
+      (loan (unwrap! (map-get? ActiveLoans { loan-id: loan-id }) ERR-LOAN-NOT-FOUND))
+      (borrower (get borrower loan))
+      (lender (get lender loan))
+      (principal (get amount loan))
+      (collateral (get collateral loan))
+      (rate-bps (get rate-bps loan))
+      (start-block (get start-block loan))
+      (blocks-elapsed (- stacks-block-height start-block))
+      (interest (calculate-interest principal rate-bps blocks-elapsed))
+      (total-owed (+ principal interest))
+    )
+    (asserts! (is-eq caller borrower) ERR-NOT-AUTHORIZED)
+    (asserts! (not (get repaid loan)) ERR-ALREADY-REPAID)
+    ;; #[allow(unchecked_data)]
+    (try! (contract-call? vusd transfer total-owed caller lender none))
+    ;; #[allow(unchecked_data)]
+    (try! (as-contract (contract-call? sbtc transfer collateral tx-sender borrower none)))
+    (map-set ActiveLoans { loan-id: loan-id }
+      (merge loan { repaid: true })
+    )
+    (print {
+      event: "p2p-loan-repaid",
+      loan-id: loan-id,
+      borrower: caller,
+      lender: lender,
+      principal: principal,
+      interest: interest,
+      total-owed: total-owed,
+      block: stacks-block-height,
+    })
+    (ok total-owed)
+  )
+)
+
+;; Permissionless liquidation of overdue or undercollateralised loans.
+;; Liquidator receives a 5% sBTC bonus; lender gets the rest.
+;; #[allow(unchecked_data)]
+(define-public (liquidate-loan
+    (loan-id uint)
+    (sbtc <sip-010-trait>)
+    (oracle <oracle-trait>))
+  (let (
+      (liquidator tx-sender)
+      (loan (unwrap! (map-get? ActiveLoans { loan-id: loan-id }) ERR-LOAN-NOT-FOUND))
+      (lender (get lender loan))
+      (borrower (get borrower loan))
+      (collateral (get collateral loan))
+      (due-block (get due-block loan))
+      (sbtc-price (unwrap! (contract-call? oracle get-price (as-contract tx-sender)) ERR-OFFER-NOT-FOUND))
+      (collateral-value (/ (* collateral sbtc-price) u100000000))
+      (principal (get amount loan))
+      (is-overdue (> stacks-block-height due-block))
+      (is-undercollat (< (* collateral-value u100) (* principal u110)))
+    )
+    (asserts! (not (get repaid loan)) ERR-ALREADY-REPAID)
+    (asserts! (or is-overdue is-undercollat) ERR-LOAN-NOT-DUE)
+    (let (
+        (liquidator-bonus (/ (* collateral LIQUIDATION-BONUS-BPS) BPS-SCALE))
+        (lender-share (- collateral liquidator-bonus))
+      )
+      ;; #[allow(unchecked_data)]
+      (try! (as-contract (contract-call? sbtc transfer lender-share tx-sender lender none)))
+      ;; #[allow(unchecked_data)]
+      (try! (as-contract (contract-call? sbtc transfer liquidator-bonus tx-sender liquidator none)))
+      (map-set ActiveLoans { loan-id: loan-id }
+        (merge loan { repaid: true })
+      )
+      (print {
+        event: "p2p-loan-liquidated",
+        loan-id: loan-id,
+        liquidator: liquidator,
+        lender: lender,
+        borrower: borrower,
+        collateral: collateral,
+        liquidator-bonus: liquidator-bonus,
+        lender-share: lender-share,
+        block: stacks-block-height,
+      })
+      (ok { lender-share: lender-share, liquidator-bonus: liquidator-bonus })
+    )
+  )
+)
+
+;; Lender cancels an unfilled offer and reclaims their VUSD.
+;; #[allow(unchecked_data)]
+(define-public (cancel-offer
+    (offer-id uint)
+    (vusd <sip-010-trait>))
+  (let (
+      (caller tx-sender)
+      (offer (unwrap! (map-get? LoanOffers { offer-id: offer-id }) ERR-OFFER-NOT-FOUND))
+    )
+    (asserts! (is-eq caller (get lender offer)) ERR-NOT-AUTHORIZED)
+    (asserts! (get active offer) ERR-OFFER-INACTIVE)
+    (asserts! (not (get filled offer)) ERR-OFFER-FILLED)
+    ;; #[allow(unchecked_data)]
+    (try! (as-contract (contract-call? vusd transfer (get amount offer) tx-sender caller none)))
+    (map-set LoanOffers { offer-id: offer-id }
+      (merge offer { active: false })
+    )
+    (print {
+      event: "p2p-offer-cancelled",
+      offer-id: offer-id,
+      lender: caller,
+      amount: (get amount offer),
+      block: stacks-block-height,
+    })
+    (ok true)
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("p2p-matching-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.p2p-matching-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 69, tx_fee: 17840, key_encoding: Compressed, signature: 011e15c21ac1905aee6d99be9093ae6e92519196d5adc771b602a038260635fd7b4c4cdf7798200cbf8362a92bd2a68036ac2d026796473bb8f551fc35aaaebb4f })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("pyth-wrapper-demo"), code_body: (impl-trait .traits-demo.oracle-trait)
+
+;; pyth-wrapper: BTC/USD oracle wrapper for Satoshi Vaults.
+;; Simnet/test: PYTH-ORACLE -> local .mock-pyth-oracle-v4-demo
+;; Testnet: change PYTH-ORACLE to SP1CGXWEAMG6P6FT04W66NVGJ7PQWMDAC19R7PJ0Y.pyth-oracle-v4
+
+(define-constant PYTH-ORACLE .mock-pyth-oracle-v4-demo)
+(define-constant PYTH-STORAGE (as-contract tx-sender))
+(define-constant BTC-USD-FEED-ID 0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43)
+(define-constant FALLBACK-PRICE u64000000000)
+
+(define-data-var cached-price uint FALLBACK-PRICE)
+
+(define-read-only (get-cached-price)
+  (var-get cached-price)
+)
+
+(define-read-only (normalise-pyth-price (price-raw int))
+  (/ (* (to-uint price-raw) u10) u100000000)
+)
+
+;; oracle-trait: returns the last cached BTC/USD price.
+(define-read-only (get-price (asset principal))
+  (begin
+    (asserts! (is-eq asset asset) (err u0))
+    (ok (var-get cached-price))
+  )
+)
+
+;; Submit a Hermes VAA to refresh the cached BTC/USD price.
+;; #[allow(unchecked_data)]
+(define-public (update-price (price-feed-bytes (buff 8192)))
+  (let (
+      ;; Step 1: submit VAA (ignore result - mock/oracle may not update)
+      (vaa-res (contract-call? PYTH-ORACLE verify-and-update-price-feeds
+        (list price-feed-bytes) {
+        amount: u1,
+        asset: tx-sender,
+      }))
+      ;; Step 2: read price from oracle
+      (price-res (contract-call? PYTH-ORACLE get-price BTC-USD-FEED-ID PYTH-STORAGE))
+    )
+    (asserts! (is-eq vaa-res vaa-res) (err u0))
+    (if (is-ok price-res)
+      (let (
+          (data (unwrap! price-res (err u0)))
+          (normalised (normalise-pyth-price (get price data)))
+        )
+        (var-set cached-price normalised)
+        (ok normalised)
+      )
+      (ok (var-get cached-price))
+    )
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("pyth-wrapper-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.pyth-wrapper-demo
+Γ₧í Encoded(StacksTransaction { version: Testnet, chain_id: 2147483648, auth: Standard(Singlesig(SinglesigSpendingCondition { hash_mode: P2PKH, signer: f6dc317eb5777c241e0c2785d8142a6ff0fa0d21, nonce: 70, tx_fee: 19080, key_encoding: Compressed, signature: 0142b7900a0b2074fd34471946eb3f249d85f91f1cddd753e7018867aef7716af678b1ca2cf119149f77381ce1898acba5cea5f3fe46b1fce398ba93392a14b625 })), anchor_mode: OnChainOnly, post_condition_mode: Allow, post_conditions: [], payload: SmartContract(TransactionSmartContract { name: ContractName("reputation-engine-demo"), code_body: ;; reputation-engine.clar
+;; Live risk engine that reads reputation-score.clar to dynamically set
+;; per-user collateral requirements. Replaces mock-reputation-engine.
+;;
+;; Collateral ratio tiers (basis points):
+;;   Score 0-499   -> u15000  (150%)
+;;   Score 500-699 -> u12000  (120%)
+;;   Score 700-849 -> u10000  (100%)
+;;   Score 850-999 -> u9000   (90%)
+;;   Score 1000    -> u8500   (85%)
+
+(impl-trait .traits-demo.risk-engine-trait)
+
+;; ---- Score -> collateral ratio lookup ------------------------------
+
+(define-read-only (score-to-ratio (score uint))
+  (if (>= score u1000)
+    u8500
+    (if (>= score u850)
+      u9000
+      (if (>= score u700)
+        u10000
+        (if (>= score u500)
+          u12000
+          u15000
+        )
+      )
+    )
+  )
+)
+
+;; ---- Internal helper: returns score as uint, defaults 500 on error -
+
+;; get-score returns (response uint uint). We extract the ok value.
+;; In a read-only context, calling another read-only is fine.
+(define-read-only (read-score (user principal))
+  (let ((res (contract-call? .reputation-score-demo get-score user)))
+    (if (is-ok res)
+      ;; the outer if(is-ok) ensures we only unwrap success, but unwrap! is 
+      ;; preferred over unwrap-panic to avoid transaction aborts.
+      (unwrap! res u500)
+      u500
+    )
+  )
+)
+
+;; ---- risk-engine-trait implementation ------------------------------
+
+(define-read-only (get-required-collateral (user principal))
+  (ok (score-to-ratio (read-score user)))
+)
+
+(define-read-only (calculate-borrow-limit
+    (collateral-usd-value uint)
+    (user principal)
+  )
+  (ok (/ (* collateral-usd-value u10000) (score-to-ratio (read-score user))))
+)
+
+;; ---- Convenience read-only ----------------------------------------
+
+(define-read-only (get-user-risk-profile (user principal))
+  (let ((score (read-score user)))
+    (ok {
+      score: score,
+      ratio-bps: (score-to-ratio score),
+    })
+  )
+)
+ }, Some(Clarity3)) }, ContractPublish(StandardPrincipalData(ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV), ContractName("reputation-engine-demo"))) Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-engine-demo
+Γ₧í Error("unable to post transaction\n{\"error\":\"transaction rejected\",\"reason\":\"ContractAlreadyExists\",\"reason_data\":{\"contract_identifier\":\"ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.default-risk-engine-demo\"},\"txid\":\"15aa7701d78a8fc9a6a0b5fdd1be971492f780075341ba868adb2d9c82ed1208\"}") Publish ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.default-risk-engine-demo

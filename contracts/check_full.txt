@@ -1,0 +1,350 @@
+﻿clarinet : error: 
+unable to compute an 
+updated plan
+At line:1 char:10
++ echo y | clarinet 
+check 2>&1 | Out-File 
+-FilePath 
+"check_full.txt" -E ...
++          
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo     
+         : 
+NotSpecified: (error   
+ : unable to compute 
+an     updated 
+plan:String) []    , 
+RemoteException
+    + 
+FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+NoSuchContract("ST3VDRC
+BYPNVQR90Y1GKRBP0M59QZ1
+YGD4564VJZV.reputation-
+score-demo")
+note: using deployments/default.simnet-plan.yaml
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:211:33
+		(map-insert withdrawal-status request-id true)
+                                ^~~~~~~~~~
+note:: source of untrusted input here
+		(request-id uint)
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:212:42
+		(map-insert completed-withdrawal-sweep request-id {
+                                         ^~~~~~~~~~
+note:: source of untrusted input here
+		(request-id uint)
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:213:16
+			sweep-txid: sweep-txid,
+               ^~~~~~~~~~
+note:: source of untrusted input here
+		(sweep-txid (buff 32))
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:214:21
+			sweep-burn-hash: burn-hash,
+                    ^~~~~~~~~
+note:: source of untrusted input here
+		(burn-hash (buff 32))
+   ^~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:215:23
+			sweep-burn-height: burn-height,
+                      ^~~~~~~~~~~
+note:: source of untrusted input here
+		(burn-height uint)
+   ^~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:244:33
+		(map-insert withdrawal-status request-id false)
+                                ^~~~~~~~~~
+note:: source of untrusted input here
+		(request-id uint)
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:272:37
+		(map-insert deposit-status {txid: txid, vout-index: vout-index} true)
+                                    ^~~~
+note:: source of untrusted input here
+		(txid (buff 32))
+   ^~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:272:55
+		(map-insert deposit-status {txid: txid, vout-index: vout-index} true)
+                                                      ^~~~~~~~~~
+note:: source of untrusted input here
+		(vout-index uint)
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:273:41
+		(map-insert completed-deposits {txid: txid, vout-index: vout-index} {
+                                        ^~~~
+note:: source of untrusted input here
+		(txid (buff 32))
+   ^~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:273:59
+		(map-insert completed-deposits {txid: txid, vout-index: vout-index} {
+                                                          ^~~~~~~~~~
+note:: source of untrusted input here
+		(vout-index uint)
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:274:12
+			amount: amount,
+           ^~~~~~
+note:: source of untrusted input here
+		(amount uint)
+   ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:275:15
+			recipient: recipient,
+              ^~~~~~~~~
+note:: source of untrusted input here
+		(recipient principal)
+   ^~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:276:16
+			sweep-txid: sweep-txid,
+               ^~~~~~~~~~
+note:: source of untrusted input here
+		(sweep-txid (buff 32))
+   ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:277:21
+			sweep-burn-hash: burn-hash,
+                    ^~~~~~~~~
+note:: source of untrusted input here
+		(burn-hash (buff 32))
+   ^~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:278:23
+			sweep-burn-height: burn-height,
+                      ^~~~~~~~~~~
+note:: source of untrusted input here
+		(burn-height uint)
+   ^~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:307:31
+		(var-set current-signer-set new-keys)
+                              ^~~~~~~~
+note:: source of untrusted input here
+		(new-keys (list 128 (buff 33)))
+   ^~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:309:37
+		(var-set current-signer-principal new-address)
+                                    ^~~~~~~~~~~
+note:: source of untrusted input here
+		(new-address principal)
+   ^~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:311:40
+		(var-set current-signature-threshold new-signature-threshold)
+                                       ^~~~~~~~~~~~~~~~~~~~~~~
+note:: source of untrusted input here
+		(new-signature-threshold uint)
+   ^~~~~~~~~~~~~~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:335:38
+		(map-set active-protocol-contracts contract-type new-contract)
+                                     ^~~~~~~~~~~~~
+note:: source of untrusted input here
+		(contract-type (buff 1))
+   ^~~~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:335:52
+		(map-set active-protocol-contracts contract-type new-contract)
+                                                   ^~~~~~~~~~~~
+note:: source of untrusted input here
+		(new-contract principal)
+   ^~~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:337:34
+		(map-set active-protocol-roles new-contract contract-type)
+                                 ^~~~~~~~~~~~
+note:: source of untrusted input here
+		(new-contract principal)
+   ^~~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-registry.clar:337:47
+		(map-set active-protocol-roles new-contract contract-type)
+                                              ^~~~~~~~~~~~~
+note:: source of untrusted input here
+		(contract-type (buff 1))
+   ^~~~~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:17:30
+		(try! (ft-burn? sbtc-token amount owner))
+                             ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-lock (amount uint) (owner principal) (contract-flag (buff 1)))
+                               ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:17:37
+		(try! (ft-burn? sbtc-token amount owner))
+                                    ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-lock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                             ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:18:31
+		(ft-mint? sbtc-token-locked amount owner)
+                              ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-lock (amount uint) (owner principal) (contract-flag (buff 1)))
+                               ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:18:38
+		(ft-mint? sbtc-token-locked amount owner)
+                                     ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-lock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                             ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:25:37
+		(try! (ft-burn? sbtc-token-locked amount owner))
+                                    ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-unlock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                 ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:25:44
+		(try! (ft-burn? sbtc-token-locked amount owner))
+                                           ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-unlock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                               ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:26:24
+		(ft-mint? sbtc-token amount owner)
+                       ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-unlock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                 ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:26:31
+		(ft-mint? sbtc-token amount owner)
+                              ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-unlock (amount uint) (owner principal) (contract-flag (buff 1)))
+                                               ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:33:24
+		(ft-mint? sbtc-token amount recipient)
+                       ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-mint (amount uint) (recipient principal) (contract-flag (buff 1)))
+                               ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:33:31
+		(ft-mint? sbtc-token amount recipient)
+                              ^~~~~~~~~
+note:: source of untrusted input here
+(define-public (protocol-mint (amount uint) (recipient principal) (contract-flag (buff 1)))
+                                             ^~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:40:24
+		(ft-burn? sbtc-token amount owner)
+                       ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-burn (amount uint) (owner principal) (contract-flag (buff 1)))
+                               ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:40:31
+		(ft-burn? sbtc-token amount owner)
+                              ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-burn (amount uint) (owner principal) (contract-flag (buff 1)))
+                                             ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:47:31
+		(ft-burn? sbtc-token-locked amount owner)
+                              ^~~~~~
+note:: source of untrusted input here
+(define-public (protocol-burn-locked (amount uint) (owner principal) (contract-flag (buff 1)))
+                                      ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:47:38
+		(ft-burn? sbtc-token-locked amount owner)
+                                     ^~~~~
+note:: source of untrusted input here
+(define-public (protocol-burn-locked (amount uint) (owner principal) (contract-flag (buff 1)))
+                                                    ^~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:54:27
+		(ok (var-set token-name new-name))
+                          ^~~~~~~~
+note:: source of untrusted input here
+(define-public (protocol-set-name (new-name (string-ascii 32)) (contract-flag (buff 1)))
+                                   ^~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:61:29
+		(ok (var-set token-symbol new-symbol))
+                            ^~~~~~~~~~
+note:: source of untrusted input here
+(define-public (protocol-set-symbol (new-symbol (string-ascii 10)) (contract-flag (buff 1)))
+                                     ^~~~~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:68:26
+		(ok (var-set token-uri new-uri))
+                         ^~~~~~~
+note:: source of untrusted input here
+(define-public (protocol-set-token-uri (new-uri (optional (string-utf8 256))) (contract-flag (buff 1)))
+                                        ^~~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:122:34
+		(try! (ft-transfer? sbtc-token amount sender recipient))
+                                 ^~~~~~
+note:: source of untrusted input here
+(define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34))))
+                          ^~~~~~
+warning: use of potentially unchecked data
+--> .\.cache\requirements\SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token.clar:122:48
+		(try! (ft-transfer? sbtc-token amount sender recipient))
+                                               ^~~~~~~~~
+note:: source of untrusted input here
+(define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34))))
+                                                           ^~~~~~~~~
+error: use of unresolved contract 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo'
+--> contracts\lending-protocol-demo.clar:112:4
+  (let (
+   ^~~
+  (let (
+      (vault (unwrap! (map-get? Vaults { owner: tx-sender }) ERR-NO-VAULT))
+      (repay-amount (if (> amount (get debt vault)) (get debt vault) amount))
+      (new-debt (- (get debt vault) repay-amount))
+      (borrower tx-sender)
+       ^
+    (try! (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.vault-usd-demo burn repay-amount tx-sender))
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    (map-set Vaults { owner: tx-sender } (merge vault { debt: new-debt }))
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    (match (contract-call? 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV.reputation-score-demo update-score borrower 10)
+      success true
+      err-val true
+    ^
+    (print { event: "repay", owner: borrower, repay-amount: repay-amount, new-debt: new-debt, block: stacks-block-height })
+    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    (ok repay-amount)
+    ^~~~~~~~~~~~~~~~~
+! 41 warnings detected
+x 1 error detected
+
+----------------------------
+Hint: what's next?
+Once you are ready to write TypeScript unit tests for your contract, run the following command:
+
+  $ npm install
+  $ npm test
+    Run all run tests in the ./tests folder.
+
+Find more information on testing with Clarinet here: https://docs.hiro.so/stacks/clarinet-js-sdk
+These hints can be disabled in the ~/.clarinet/clarinetrc.toml file.
+  $ mkdir -p ~/.clarinet; echo "enable_hints = false" >> ~/.clarinet/clarinetrc.toml
+----------------------------

@@ -1,0 +1,42 @@
+# Stacks / Clarinet
+.clarinet
+target/
+settings/*.toml
+!settings/Testnet.toml
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.sln
+*.sw?
+
+# Temp / Debug files in root
+debug-dump.txt
+frontend-dump.txt
+missing-frontend-code.txt
+final_tx_status.json
+tx_details.json
+tx_details_utf8.json
+tx_resp.json
+tx_status.json
+txs.json
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+.cache/

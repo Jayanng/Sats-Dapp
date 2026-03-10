@@ -1,0 +1,92 @@
+[project]
+name = 'contracts'
+description = ''
+authors = []
+telemetry = false
+cache_dir = '.\.cache'
+
+[[project.requirements]]
+contract_id = 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-deposit'
+
+[contracts.default-risk-engine-demo]
+path = 'contracts/default-risk-engine-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.lending-protocol-final]
+path = 'contracts/lending-protocol-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.mock-oracle-demo]
+path = 'contracts/mock-oracle-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.mock-pyth-oracle-v4-demo]
+path = 'contracts/mock-pyth-oracle-v4-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.mock-reputation-engine-demo]
+path = 'contracts/mock-reputation-engine-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.mock-sbtc-demo]
+path = 'contracts/mock-sbtc-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.optimizer-vault-demo]
+path = 'contracts/optimizer-vault-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.p2p-matching-demo]
+path = 'contracts/p2p-matching-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.pyth-wrapper-demo]
+path = 'contracts/pyth-wrapper-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.reputation-engine-demo]
+path = 'contracts/reputation-engine-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.reputation-score-demo]
+path = 'contracts/reputation-score-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.traits-demo]
+path = 'contracts/traits-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.vault-usd-demo]
+path = 'contracts/vault-usd-demo.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[contracts.vault-usd-final]
+path = 'contracts/vault-usd-final.clar'
+clarity_version = 3
+epoch = 'latest'
+
+[repl.analysis]
+passes = []
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
+
+[repl.remote_data]
+enabled = true
+api_url = 'https://api.testnet.hiro.so'

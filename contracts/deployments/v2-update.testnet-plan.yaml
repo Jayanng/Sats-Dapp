@@ -1,0 +1,18 @@
+---
+id: 1
+name: V2 Update - lending-protocol with get-vault
+network: testnet
+stacks-node: "https://api.testnet.hiro.so"
+bitcoin-node: "http://blockstack:blockstacksystem@bitcoind.testnet.stacks.co:18332"
+plan:
+  batches:
+    - id: 0
+      transactions:
+        - contract-publish:
+            contract-name: lending-protocol-demo-demo
+            expected-sender: ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV
+            cost: 100000
+            path: "contracts\\lending-protocol-demo.clar"
+            anchor-block-only: true
+            clarity-version: 3
+      epoch: "3.2"

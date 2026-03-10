@@ -1,0 +1,10 @@
+default-risk-engine-demo:404
+reputation-score-demo:404
+vault-usd-demo:404
+pyth-wrapper-demo:404
+reputation-engine-demo:404
+mock-sbtc-demo:404
+mock-oracle-demo:404
+lending-protocol-demo:404
+optimizer-vault-demo:404
+p2p-matching-demo:404
