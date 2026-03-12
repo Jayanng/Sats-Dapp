@@ -13,56 +13,10 @@ const DEPLOYER = 'ST3VDRCBYPNVQR90Y1GKRBP0M59QZ1YGD4564VJZV'
 const P2P_CONTRACT = 'p2p-matching-demo'
 const VUSD_CONTRACT = 'vault-usd-final'
 const SBTC_CONTRACT = 'mock-sbtc-demo'
+const REPUTATION_CONTRACT = 'mock-reputation-engine-demo'
+const ORACLE_CONTRACT = 'mock-oracle-demo'
 
-async function fetchLiveOffers(address) {
-    try {
-        const sender = address || DEPLOYER
-        // Get total offer count
-        const countResult = await fetchCallReadOnlyFunction({
-            network: 'testnet',
-            contractAddress: DEPLOYER,
-            contractName: 'p2p-matching-demo',
-            functionName: 'get-next-offer-id',
-            functionArgs: [],
-            senderAddress: sender,
-        })
-        const count = Number(cvToJSON(countResult).value ?? 0)
-        if (count === 0) return []
-
-        const offers = []
-        for (let i = 0; i < count; i++) {
-            try {
-                const result = await fetchCallReadOnlyFunction({
-                    network: 'testnet',
-                    contractAddress: DEPLOYER,
-                    contractName: 'p2p-matching-demo',
-                    functionName: 'get-offer',
-                    functionArgs: [Cl.uint(i)],
-                    senderAddress: sender,
-                })
-                const json = cvToJSON(result)
-                if (!json.value) continue
-                const v = json.value.value
-                offers.push({
-                    offerId: i,
-                    lender: v.lender?.value ?? '',
-                    amount: Number(v.amount?.value ?? 0),
-                    rateBps: Number(v['rate-bps']?.value ?? 0),
-                    minDuration: Number(v['min-duration']?.value ?? 0),
-                    filled: v.filled?.value ?? false,
-                    active: v.active?.value ?? false,
-                })
-            } catch (e) {
-                continue
-            }
-        }
-        const filtered = offers.filter(o => o.active && !o.filled)
-        return filtered
-    } catch (e) {
-        console.error('fetchLiveOffers error:', e)
-        return []
-    }
-}
+const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 
 // APR in BPS -> readable string
 function formatRate(bps) {
@@ -86,72 +40,81 @@ function formatDuration(blocks) {
     return days < 1 ? `${blocks} blocks` : `${days} day${days > 1 ? 's' : ''}`
 }
 
-function OfferRow({ offer, pendingTxId, setPendingTxId }) {
-    const { isConnected } = useWallet()
+function OfferRow({ offer, onFillPending, onFillSuccess, onFillFailed }) {
+    const { address } = useWallet()
     const [filling, setFilling] = useState(false)
-    const [confirmedTxId, setConfirmedTxId] = useState(null)
-    const [failedReason, setFailedReason] = useState(null)
 
     async function handleFill() {
-        if (!isConnected) { toast.error('Connect wallet first'); return }
+        if (!address) {
+            alert('Please connect your wallet first')
+            return
+        }
+
+        // sBTC balance check
+        try {
+            const sbtcRes = await fetchCallReadOnlyFunction({
+                network: 'testnet',
+                contractAddress: DEPLOYER,
+                contractName: SBTC_CONTRACT,
+                functionName: 'get-balance',
+                functionArgs: [Cl.principal(address)],
+                senderAddress: address,
+            })
+            const sbtcBalance = Number(cvToJSON(sbtcRes).value?.value || 0)
+            if (sbtcBalance === 0) {
+                alert('You need sBTC collateral to fill this offer. Go to the Faucet to mint testnet tokens first.')
+                return
+            }
+        } catch (e) {
+            console.error('sBTC balance check failed:', e)
+        }
+
         setFilling(true)
         try {
+            console.log('Building fill-offer tx:', {
+                offerId: offer.offerId,
+                address: address,
+            })
+
             await openContractCall({
                 contractAddress: DEPLOYER,
                 contractName: P2P_CONTRACT,
                 functionName: 'fill-offer',
                 functionArgs: [
                     Cl.uint(offer.offerId),
-                    Cl.uint(offer.minDuration),
+                    Cl.uint(offer.minDuration || 144),
                     Cl.contractPrincipal(DEPLOYER, SBTC_CONTRACT),
                     Cl.contractPrincipal(DEPLOYER, VUSD_CONTRACT),
-                    Cl.contractPrincipal(DEPLOYER, 'mock-reputation-engine-demo'),
-                    Cl.contractPrincipal(DEPLOYER, 'mock-oracle-demo'),
+                    Cl.contractPrincipal(DEPLOYER, REPUTATION_CONTRACT),
+                    Cl.contractPrincipal(DEPLOYER, ORACLE_CONTRACT),
                 ],
                 network: NETWORK_STRING,
+                postConditionMode: PostConditionMode.Allow,
                 onFinish: (data) => {
-                    setPendingTxId(data.txId)
+                    onFillPending(data.txId)
                     pollTx(data.txId, {
                         setIsTxPending: setFilling,
                         onConfirmed: (txId) => {
-                            setPendingTxId(null)
-                            setConfirmedTxId(txId)
+                            onFillSuccess(txId, offer)
                         },
                         onFailed: (txId, reason) => {
-                            setPendingTxId(null)
-                            setFailedReason(reason)
+                            onFillFailed(txId, reason)
                         }
                     })
                 },
-                onCancel: () => toast('Cancelled'),
+                onCancel: () => {
+                    setFilling(false)
+                    console.log('User cancelled fill')
+                },
             })
         } catch (e) {
-            toast.error('Transaction failed')
-        } finally {
+            console.error('Fill error:', e)
             setFilling(false)
         }
     }
 
     return (
         <tr className="border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors">
-            <TxSuccessModal 
-                isOpen={!!confirmedTxId}
-                onClose={() => setConfirmedTxId(null)}
-                txId={confirmedTxId}
-                title="Loan Filled!"
-                subtitle="Your loan has been successfully funded."
-                details={[
-                    { label: 'Offer ID', value: `#${offer.offerId}` },
-                    { label: 'Amount', value: formatVusd(offer.amount) },
-                    { label: 'Rate', value: formatRate(offer.rateBps) }
-                ]}
-            />
-
-            <TxFailedModal 
-                isOpen={!!failedReason}
-                onClose={() => setFailedReason(null)}
-                error={failedReason}
-            />
             <td className="px-4 py-3 text-sm font-mono text-zinc-500">#{offer.offerId}</td>
             <td className="px-4 py-3 text-sm font-mono text-zinc-500 hidden md:table-cell">
                 {offer.lender.slice(0, 8)}...{offer.lender.slice(-4)}
@@ -166,14 +129,18 @@ function OfferRow({ offer, pendingTxId, setPendingTxId }) {
                 {formatDuration(offer.minDuration)}
             </td>
             <td className="px-4 py-3">
-                <button
-                    id={`fill-offer-${offer.offerId}`}
-                    onClick={handleFill}
-                    disabled={filling}
-                    className="px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 disabled:opacity-40 transition-colors"
-                >
-                    {filling ? 'Confirming...' : 'Fill Offer'}
-                </button>
+                {offer.lender.toLowerCase() === address?.toLowerCase() ? (
+                    <span className="px-3 py-1 bg-zinc-700 text-zinc-400 text-xs rounded-lg">Your Offer</span>
+                ) : (
+                    <button
+                        id={`fill-offer-${offer.offerId}`}
+                        onClick={handleFill}
+                        disabled={filling}
+                        className="px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white hover:bg-primary/90 disabled:opacity-40 transition-colors"
+                    >
+                        {filling ? 'Confirming...' : 'Fill Offer'}
+                    </button>
+                )}
             </td>
         </tr>
     )
@@ -247,7 +214,7 @@ function PostOfferPanel({ onOfferPosted, pendingTxId, setPendingTxId }) {
                 isOpen={!!confirmedTxId}
                 onClose={() => setConfirmedTxId(null)}
                 txId={confirmedTxId}
-                title="Offer Posted!"
+                title="Offer Posted"
                 subtitle="Your loan offer is now live in the order book."
                 details={[
                     { label: 'Amount', value: `${amount} VUSD` },
@@ -316,20 +283,156 @@ function PostOfferPanel({ onOfferPosted, pendingTxId, setPendingTxId }) {
 export default function P2PMarket() {
     const [tab, setTab] = useState('offers')
     const [offers, setOffers] = useState([])
+    const [loading, setLoading] = useState(false)
     const [offersLoading, setOffersLoading] = useState(true)
     const [pendingTxId, setPendingTxId] = useState(null)
+    const [fillTxModal, setFillTxModal] = useState({ type: null, txId: null, reason: null, offer: null })
+    const [myLoans, setMyLoans] = useState([])
 
     const { address } = useWallet()
-    useEffect(() => {
-        fetchLiveOffers(address).then(data => {
-            setOffers(data)
+
+    const fetchLiveOffers = async () => {
+        try {
+            setLoading(true)
+            const offerPromises = Array.from(
+                { length: 15 }, 
+                (_, i) => fetchCallReadOnlyFunction({
+                    network: 'testnet',
+                    contractAddress: DEPLOYER,
+                    contractName: 'p2p-matching-demo',
+                    functionName: 'get-offer',
+                    functionArgs: [Cl.uint(i + 1)],
+                    senderAddress: address || DEPLOYER,
+                }).catch(() => null)
+            )
+            
+            const results = await Promise.all(offerPromises)
+            console.log('Raw offer 1 result:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            const parsed = []
+            
+            results.forEach((res, i) => {
+                if (!res) return
+                try {
+                    const json = cvToJSON(res)
+                    const offer = json?.value?.value
+                    if (!offer) return
+                    const isActive = offer?.active?.value || offer?.['is-active']?.value
+                    if (!isActive) return
+                    parsed.push({
+                        offerId: i + 1,
+                        amount: Number(offer?.amount?.value ?? 0),
+                        rateBps: Number(offer?.['rate-bps']?.value || offer?.rate?.value || 0),
+                        lender: offer?.lender?.value ?? '',
+                        minDuration: Number(offer?.['min-duration']?.value ?? 0),
+                        active: true,
+                    })
+                } catch (e) {}
+            })
+            
+            setOffers(parsed)
             setOffersLoading(false)
-        })
-        // Auto-refresh every 30 seconds
-        const interval = setInterval(() => {
-            fetchLiveOffers(address).then(setOffers)
-        }, 30000)
-        return () => clearInterval(interval)
+        } catch (e) {
+            console.error('fetchLiveOffers error:', e)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const fetchMyLoans = async () => {
+        if (!address) return
+        try {
+            const loanPromises = Array.from(
+                { length: 15 },
+                (_, i) => fetchCallReadOnlyFunction({
+                    network: 'testnet',
+                    contractAddress: DEPLOYER,
+                    contractName: P2P_CONTRACT,
+                    functionName: 'get-loan',
+                    functionArgs: [Cl.uint(i + 1)],
+                    senderAddress: address,
+                }).catch(() => null)
+            )
+            const results = await Promise.all(loanPromises)
+            console.log('Raw loan check offer 1:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            const loans = []
+            results.forEach((res, i) => {
+                if (!res) return
+                try {
+                    const json = cvToJSON(res)
+                    const loan = json?.value?.value
+                    if (!loan) return
+                    const borrower = loan?.borrower?.value
+                    const repaid = loan?.repaid?.value
+                    console.log(`Loan ${i+1}:`, {
+                        borrower,
+                        repaid,
+                        myAddress: address
+                    })
+                    if (borrower && borrower.toLowerCase() === address.toLowerCase()) {
+                        loans.push({
+                            loanId: i + 1,
+                            amount: Number(loan?.amount?.value ?? 0),
+                            rateBps: Number(loan?.['rate-bps']?.value ?? 0),
+                            lender: loan?.lender?.value ?? '',
+                            collateral: Number(loan?.collateral?.value ?? 0),
+                            dueBlock: Number(loan?.['due-block']?.value ?? 0),
+                            isActive: !loan?.repaid?.value,
+                        })
+                    }
+                } catch (e) {}
+            })
+            setMyLoans(loans)
+        } catch (e) {
+            console.error('fetchMyLoans error:', e)
+        }
+    }
+
+    const handleRepayLoan = async (loanId, amount) => {
+        if (!address) return
+        try {
+            await openContractCall({
+                network: 'testnet',
+                contractAddress: DEPLOYER,
+                contractName: P2P_CONTRACT,
+                functionName: 'repay-loan',
+                functionArgs: [
+                    Cl.uint(loanId),
+                    Cl.contractPrincipal(DEPLOYER, VUSD_CONTRACT),
+                    Cl.contractPrincipal(DEPLOYER, SBTC_CONTRACT),
+                ],
+                postConditionMode: PostConditionMode.Allow,
+                onFinish: (data) => {
+                    setFillTxModal({ type: 'pending', txId: data.txId })
+                    pollTx(data.txId, {
+                        onConfirmed: (txId) => {
+                            setFillTxModal({ 
+                                type: 'success', 
+                                txId,
+                                title: 'Loan Repaid',
+                                description: 'Your loan has been fully repaid.',
+                                details: {
+                                    'Amount Repaid': `${(amount / 1_000_000).toFixed(2)} VUSD`,
+                                    'Loan ID': `#${loanId}`,
+                                    'Status': 'Closed'
+                                }
+                            })
+                            setTimeout(() => fetchMyLoans(), 5000)
+                        },
+                        onFailed: (txId, reason) => {
+                            setFillTxModal({ type: 'failed', txId, reason })
+                        }
+                    })
+                }
+            })
+        } catch (e) {
+            console.error('Repay error:', e)
+            toast.error('Failed to initiate repayment')
+        }
+    }
+
+    useEffect(() => {
+        fetchLiveOffers()
+        fetchMyLoans()
     }, [address])
 
     const tabs = [
@@ -353,7 +456,7 @@ export default function P2PMarket() {
             {/* Stats strip */}
             <div className="grid grid-cols-3 gap-4">
                 {[
-                    { label: 'Active Offers', value: offers.filter(o => !o.filled).length.toString(), icon: 'local_offer', color: 'text-primary' },
+                    { label: 'Active Offers', value: offers.filter(o => o.active).length.toString(), icon: 'local_offer', color: 'text-primary' },
                     { label: 'Total VUSD Listed', value: formatVusd(offers.reduce((s, o) => s + o.amount, 0)), icon: 'payments', color: 'text-emerald-500' },
                     { label: 'Avg Rate', value: offers.length ? formatRate(Math.round(offers.reduce((s, o) => s + o.rateBps, 0) / offers.length)) : '—', icon: 'percent', color: 'text-indigo-500' },
                 ].map(s => (
@@ -372,11 +475,7 @@ export default function P2PMarket() {
             <div className="flex justify-end mb-2">
                 <button
                     onClick={() => {
-                        setOffersLoading(true)
-                        fetchLiveOffers(address).then(data => {
-                            setOffers(data)
-                            setOffersLoading(false)
-                        })
+                        fetchLiveOffers()
                     }}
                     className="flex items-center gap-1 text-xs font-bold text-zinc-400 hover:text-primary transition-colors">
                     <span className="material-symbols-outlined text-sm">refresh</span>
@@ -398,10 +497,10 @@ export default function P2PMarket() {
             {/* Offer Book tab */}
             {tab === 'offers' && (
                 <div className="card overflow-hidden">
-                    {offersLoading ? (
-                        <div className="flex items-center justify-center gap-2 text-zinc-400 py-12">
-                            <div className="size-4 border-2 border-zinc-300 border-t-primary rounded-full animate-spin" />
-                            Loading live offers...
+                    {loading ? (
+                        <div className="text-center py-12 text-zinc-400">
+                            <div className="animate-spin w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full mx-auto mb-3"></div>
+                            <p>Loading offers...</p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
@@ -414,7 +513,31 @@ export default function P2PMarket() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {offers.map(o => <OfferRow key={o.offerId} offer={o} pendingTxId={pendingTxId} setPendingTxId={setPendingTxId} />)}
+                                {offers.map(o => (
+                                    <OfferRow 
+                                        key={o.offerId} 
+                                        offer={o} 
+                                        onFillPending={(txId) => setFillTxModal({ type: 'pending', txId, offer: o })}
+                                        onFillSuccess={(txId, offer) => {
+                                            setFillTxModal({ 
+                                                type: 'success', 
+                                                txId, 
+                                                title: "Offer Filled",
+                                                description: "Loan matched directly on-chain.",
+                                                details: {
+                                                    'Offer ID': `#${offer.offerId}`,
+                                                    'Amount': formatVusd(offer.amount),
+                                                    'Rate': formatRate(offer.rateBps)
+                                                }
+                                            })
+                                            setTimeout(() => {
+                                                fetchLiveOffers()
+                                                setTimeout(() => fetchMyLoans(), 5000)
+                                            }, 1000)
+                                        }}
+                                        onFillFailed={(txId, reason) => setFillTxModal({ type: 'failed', txId, reason })}
+                                    />
+                                ))}
                                 {offers.length === 0 && (
                                     <tr><td colSpan={6} className="px-4 py-12 text-center text-zinc-400 text-sm">No active offers. Be the first to post one!</td></tr>
                                 )}
@@ -427,22 +550,94 @@ export default function P2PMarket() {
 
             {/* Post Offer tab */}
             {tab === 'post' && <PostOfferPanel onOfferPosted={() => {
-                fetchLiveOffers(address).then(setOffers)
+                fetchLiveOffers()
             }} pendingTxId={pendingTxId} setPendingTxId={setPendingTxId} />}
+
+            {/* Fill Offer flow modals */}
+            <TxPendingModal isOpen={fillTxModal.type === 'pending'} txId={fillTxModal.txId} />
+            <TxSuccessModal 
+                isOpen={fillTxModal.type === 'success'} 
+                txId={fillTxModal.txId}
+                onClose={() => setFillTxModal({ type: null })}
+                title={fillTxModal.title ?? "Success!"}
+                description={fillTxModal.description ?? ""}
+                details={fillTxModal.details ?? {}}
+            />
+            <TxFailedModal 
+                isOpen={fillTxModal.type === 'failed'}
+                txId={fillTxModal.txId}
+                error={fillTxModal.reason}
+                onClose={() => setFillTxModal({ type: null })} 
+            />
 
             <TxPendingModal isOpen={!!pendingTxId} txId={pendingTxId} />
 
             {/* My Loans tab */}
             {tab === 'loans' && (
-                <div className="card p-8 flex flex-col items-center gap-4 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 flex items-center justify-center">
-                        <span className="material-symbols-outlined text-3xl text-zinc-300">account_balance</span>
+                myLoans.length === 0 ? (
+                    <div className="card p-8 flex flex-col items-center gap-4 text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 flex items-center justify-center">
+                            <span className="material-symbols-outlined text-3xl text-zinc-300">account_balance</span>
+                        </div>
+                        <div>
+                            <h3 className="font-black text-zinc-900 dark:text-zinc-100 mb-1">No Active Loans</h3>
+                            <p className="text-sm text-zinc-400">Connect your wallet and fill an offer to see your loans here.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="font-black text-zinc-900 dark:text-zinc-100 mb-1">No Active Loans</h3>
-                        <p className="text-sm text-zinc-400">Connect your wallet and fill an offer to see your loans here.</p>
+                ) : (
+                    <div className="card overflow-hidden">
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
+                                        {['Loan ID', 'Amount', 'Rate', 'Lender', 'Status', 'Action'].map(h => (
+                                            <th key={h} className="px-4 py-3 text-left text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                                                {h}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {myLoans.map(loan => (
+                                        <tr key={loan.loanId} className="border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors">
+                                            <td className="px-4 py-3 text-sm font-mono text-zinc-500">#{loan.loanId}</td>
+                                            <td className="px-4 py-3 font-black mono text-zinc-900 dark:text-zinc-100">
+                                                {(loan.amount / 1_000_000).toFixed(2)} VUSD
+                                            </td>
+                                            <td className="px-4 py-3 text-emerald-500 font-bold text-sm">
+                                                {(loan.rateBps / 100).toFixed(2)}% APR
+                                            </td>
+                                            <td className="px-4 py-3 text-sm font-mono text-zinc-500">
+                                                {loan.lender.slice(0, 8)}...{loan.lender.slice(-4)}
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                {loan.isActive ? (
+                                                    <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-500 text-[10px] font-black uppercase tracking-wider">
+                                                        Active
+                                                    </span>
+                                                ) : (
+                                                    <span className="px-2 py-1 rounded bg-zinc-500/10 text-zinc-500 text-[10px] font-black uppercase tracking-wider">
+                                                        Repaid
+                                                    </span>
+                                                )}
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                {loan.isActive && (
+                                                    <button
+                                                        onClick={() => handleRepayLoan(loan.loanId, loan.amount)}
+                                                        className="px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold rounded-lg transition-all"
+                                                    >
+                                                        Repay
+                                                    </button>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                )
             )}
 
             {/* Info box */}

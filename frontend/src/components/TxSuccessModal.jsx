@@ -7,14 +7,16 @@ export default function TxSuccessModal({
     isOpen, 
     onClose, 
     txId, 
-    title = "Transaction Confirmed!", 
-    subtitle = "Your transaction has been successfully confirmed on-chain.", 
-    details = [], 
+    title = "Transaction Confirmed", 
+    description,
+    subtitle,
+    details = {}, 
     explorerUrl 
 }) {
     if (!isOpen) return null
 
     const url = explorerUrl || `https://explorer.hiro.so/txid/${txId}?chain=testnet`
+    const displayDescription = description || subtitle || "Your transaction has been successfully confirmed on-chain."
 
     return (
         <div className="fixed inset-0 z-60 flex items-center justify-center p-4">
@@ -33,18 +35,31 @@ export default function TxSuccessModal({
 
                     <div>
                         <h2 className="text-2xl font-black text-zinc-900 dark:text-zinc-100">{title}</h2>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">{subtitle}</p>
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">{displayDescription}</p>
                     </div>
 
                     {/* Summary card */}
-                    {details.length > 0 && (
-                        <div className="w-full rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-4 space-y-2 text-left">
-                            {details.map((detail, idx) => (
-                                <div key={idx} className="flex justify-between text-sm">
-                                    <span className="text-zinc-500 dark:text-zinc-400">{detail.label}</span>
-                                    <span className="font-black mono text-zinc-900 dark:text-zinc-100">{detail.value}</span>
-                                </div>
-                            ))}
+                    {((Array.isArray(details) && details.length > 0) || (details && !Array.isArray(details) && Object.keys(details).length > 0)) && (
+                        <div className="w-full bg-zinc-50 dark:bg-zinc-800/60 rounded-xl p-4 space-y-2 text-sm text-left border border-zinc-100 dark:border-zinc-700">
+                            {Array.isArray(details) ? (
+                                details.map((detail, idx) => (
+                                    <div key={idx} className="flex justify-between">
+                                        <span className="text-zinc-500 dark:text-zinc-400">{detail.label}</span>
+                                        <span className="text-zinc-900 dark:text-white font-black mono text-right">
+                                            {detail.value}
+                                        </span>
+                                    </div>
+                                ))
+                            ) : (
+                                Object.entries(details).map(([key, value]) => (
+                                    <div key={key} className="flex justify-between">
+                                        <span className="text-zinc-500 dark:text-zinc-400">{key}</span>
+                                        <span className="text-zinc-900 dark:text-white font-black mono text-right">
+                                            {value}
+                                        </span>
+                                    </div>
+                                ))
+                            )}
                         </div>
                     )}
 
