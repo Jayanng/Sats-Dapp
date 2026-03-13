@@ -12,13 +12,6 @@ export const NETWORK_STRING = 'testnet'                     // pass to request()
 export const HIRO_API = STACKS_TESTNET.client.baseUrl // https://api.testnet.hiro.so
 export const HIRO_API_KEY = 'd0a95c5d7d15cc7ad23d37ded6b5fd22'
 
-if (typeof window !== 'undefined') {
-  const isProduction = window.location.hostname !== 'localhost'
-  if (isProduction) {
-    STACKS_TESTNET.client.baseUrl = '/api/hiro'
-  }
-}
-
 STACKS_TESTNET.client.fetch = (url, opts = {}) => {
   return fetch(url, {
     ...opts,
