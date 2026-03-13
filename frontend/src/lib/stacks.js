@@ -10,6 +10,17 @@ import { validateStacksAddress, fetchCallReadOnlyFunction, cvToJSON, Cl } from '
 export const NETWORK = STACKS_TESTNET
 export const NETWORK_STRING = 'testnet'                     // pass to request() / contract calls
 export const HIRO_API = STACKS_TESTNET.client.baseUrl // https://api.testnet.hiro.so
+export const HIRO_API_KEY = 'd0a95c5d7d15cc7ad23d37ded6b5fd22'
+
+STACKS_TESTNET.client.fetch = (url, opts = {}) => {
+  return fetch(url, {
+    ...opts,
+    headers: {
+      ...opts.headers,
+      'x-api-key': 'd0a95c5d7d15cc7ad23d37ded6b5fd22',
+    }
+  })
+}
 
 /**
  * Validate a Stacks testnet address (must start with 'ST').

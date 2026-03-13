@@ -308,7 +308,7 @@ export default function P2PMarket() {
         try {
             setLoading(true)
             const offerPromises = Array.from(
-                { length: 15 },
+                { length: 25 },
                 (_, i) => fetchWithRetry({
                     network: 'testnet',
                     contractAddress: DEPLOYER,
@@ -344,9 +344,7 @@ export default function P2PMarket() {
                 } catch (e) {}
             })
             
-            if (parsed.length > 0) {
-                setOffers(parsed)
-            }
+            setOffers(parsed)
             setOffersLoading(false)
         } catch (e) {
             console.warn('fetchLiveOffers failed, keeping existing data:', e.message)
@@ -360,7 +358,7 @@ export default function P2PMarket() {
         if (!address) return
         try {
             const loanPromises = Array.from(
-                { length: 15 },
+                { length: 25 },
                 (_, i) => fetchWithRetry({
                     network: 'testnet',
                     contractAddress: DEPLOYER,
@@ -389,6 +387,10 @@ export default function P2PMarket() {
                         myAddress: address
                     })
                     if (borrower && borrower.toLowerCase() === address.toLowerCase()) {
+                        console.log(`MATCH loan ${i+1}:`, {
+                            borrower, address,
+                            repaid: loan?.repaid?.value
+                        })
                         loans.push({
                             loanId: i + 1,
                             amount: Number(loan?.amount?.value ?? 0),
@@ -401,9 +403,7 @@ export default function P2PMarket() {
                     }
                 } catch (e) {}
             })
-            if (loans.length > 0) {
-                setMyLoans(loans)
-            }
+            setMyLoans(loans)
         } catch (e) {
             console.warn('fetchMyLoans failed, keeping existing data:', e.message)
             // Do NOT clear loans on error

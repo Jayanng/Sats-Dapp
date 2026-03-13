@@ -5,7 +5,10 @@ export async function pollTx(txId, { onConfirmed, onFailed, onTimeout, setIsTxPe
     const interval = setInterval(async () => {
         attempts++
         try {
-            const res = await fetch(`https://api.testnet.hiro.so/extended/v1/tx/${txId}`)
+            const res = await fetch(
+                `https://api.testnet.hiro.so/extended/v1/tx/${txId}`,
+                { headers: { 'x-api-key': 'd0a95c5d7d15cc7ad23d37ded6b5fd22' } }
+            )
             if (!res.ok) return
             const tx = await res.json()
             const status = tx.tx_status

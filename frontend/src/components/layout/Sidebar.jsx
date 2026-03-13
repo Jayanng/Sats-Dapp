@@ -13,7 +13,7 @@ const navItems = [
 ]
 
 async function fetchBlockHeight() {
-    const res = await fetch(`${HIRO_API}/v2/info`)
+    const res = await fetch(`${HIRO_API}/v2/info`, { headers: { 'x-api-key': 'd0a95c5d7d15cc7ad23d37ded6b5fd22' } })
     const data = await res.json()
     return data.stacks_tip_height ?? null
 }
