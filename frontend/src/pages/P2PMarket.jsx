@@ -18,6 +18,19 @@ const ORACLE_CONTRACT = 'mock-oracle-demo'
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 
+const fetchWithRetry = async (fnArgs) => {
+    try {
+        return await fetchCallReadOnlyFunction(fnArgs)
+    } catch (e) {
+        await new Promise(r => setTimeout(r, 1000))
+        try {
+            return await fetchCallReadOnlyFunction(fnArgs)
+        } catch (e2) {
+            return null
+        }
+    }
+}
+
 // APR in BPS -> readable string
 function formatRate(bps) {
     return (bps / 100).toFixed(2) + '% APR'
@@ -295,19 +308,21 @@ export default function P2PMarket() {
         try {
             setLoading(true)
             const offerPromises = Array.from(
-                { length: 15 }, 
-                (_, i) => fetchCallReadOnlyFunction({
+                { length: 15 },
+                (_, i) => fetchWithRetry({
                     network: 'testnet',
                     contractAddress: DEPLOYER,
                     contractName: 'p2p-matching-demo',
                     functionName: 'get-offer',
                     functionArgs: [Cl.uint(i + 1)],
                     senderAddress: address || DEPLOYER,
-                }).catch(() => null)
+                })
             )
             
             const results = await Promise.all(offerPromises)
-            console.log('Raw offer 1 result:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            if (results[0]) {
+                console.log('Raw offer 1 result:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            }
             const parsed = []
             
             results.forEach((res, i) => {
@@ -316,8 +331,8 @@ export default function P2PMarket() {
                     const json = cvToJSON(res)
                     const offer = json?.value?.value
                     if (!offer) return
-                    const isActive = offer?.active?.value || offer?.['is-active']?.value
-                    if (!isActive) return
+                    const isVisible = !offer?.filled?.value || offer?.active?.value
+                    if (!isVisible) return
                     parsed.push({
                         offerId: i + 1,
                         amount: Number(offer?.amount?.value ?? 0),
@@ -329,10 +344,13 @@ export default function P2PMarket() {
                 } catch (e) {}
             })
             
-            setOffers(parsed)
+            if (parsed.length > 0) {
+                setOffers(parsed)
+            }
             setOffersLoading(false)
         } catch (e) {
-            console.error('fetchLiveOffers error:', e)
+            console.warn('fetchLiveOffers failed, keeping existing data:', e.message)
+            // Do NOT clear offers on error
         } finally {
             setLoading(false)
         }
@@ -343,17 +361,19 @@ export default function P2PMarket() {
         try {
             const loanPromises = Array.from(
                 { length: 15 },
-                (_, i) => fetchCallReadOnlyFunction({
+                (_, i) => fetchWithRetry({
                     network: 'testnet',
                     contractAddress: DEPLOYER,
                     contractName: P2P_CONTRACT,
                     functionName: 'get-loan',
                     functionArgs: [Cl.uint(i + 1)],
                     senderAddress: address,
-                }).catch(() => null)
+                })
             )
             const results = await Promise.all(loanPromises)
-            console.log('Raw loan check offer 1:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            if (results[0]) {
+                console.log('Raw loan check offer 1:', JSON.stringify(cvToJSON(results[0]), null, 2))
+            }
             const loans = []
             results.forEach((res, i) => {
                 if (!res) return
@@ -381,9 +401,12 @@ export default function P2PMarket() {
                     }
                 } catch (e) {}
             })
-            setMyLoans(loans)
+            if (loans.length > 0) {
+                setMyLoans(loans)
+            }
         } catch (e) {
-            console.error('fetchMyLoans error:', e)
+            console.warn('fetchMyLoans failed, keeping existing data:', e.message)
+            // Do NOT clear loans on error
         }
     }
 
